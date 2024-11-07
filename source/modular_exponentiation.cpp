@@ -15,7 +15,7 @@ public:
     BigInteger(string val) : value(val) {}
 
     // Định nghĩa toán tử cộng
-    BigInteger operator+(const BigInteger& other) {
+    BigInteger operator+(const BigInteger& other) const {
         return BigInteger(add(this->value, other.value));
     }
 
@@ -43,25 +43,25 @@ public:
     }
 
     // Định nghĩa toán tử trừ
-    BigInteger operator-(const BigInteger& other) {
+    BigInteger operator-(const BigInteger& other) const {
         return BigInteger(subtract(this->value, other.value));
     }
 
     // Định nghĩa toán tử nhân
-    BigInteger operator*(const BigInteger& other) {
+    BigInteger operator*(const BigInteger& other) const {
         return BigInteger(multiply(this->value, other.value));
     }
 
     // Định nghĩa toán tử chia (chia cho 2)
-    BigInteger operator/(int divisor) {
+    BigInteger operator/(int divisor) const {
         if (divisor == 2) {
             return BigInteger(divideBy2(this->value));
         }
-        // throw invalid_argument("Only division by 2 is implemented.");
+        throw invalid_argument("Only division by 2 is implemented.");
     }
 
     // Định nghĩa toán tử chia lấy dư
-    BigInteger operator%(const BigInteger& other) {
+    BigInteger operator%(const BigInteger& other) const {
         return BigInteger(mod(this->value, other.value));
     }
 
@@ -71,7 +71,7 @@ public:
     }
 
     // Phương thức để cộng hai số lớn dưới dạng chuỗi
-    string add(string num1, string num2) {
+    string add(string num1, string num2) const {
         string result = "";
         int carry = 0;
         int n1 = num1.size(), n2 = num2.size();
@@ -92,7 +92,7 @@ public:
     }
 
     // Phương thức để trừ hai số lớn dưới dạng chuỗi
-    string subtract(string num1, string num2) {
+    string subtract(string num1, string num2) const {
         if (!isGreaterOrEqual(num1, num2))
             return "0"; // Giới hạn nếu num1 < num2 (đơn giản hóa)
 
@@ -132,7 +132,7 @@ public:
     }
 
     // Phương thức kiểm tra nếu num1 >= num2
-    bool isGreaterOrEqual(string num1, string num2) {
+    bool isGreaterOrEqual(string num1, string num2) const {
         if (num1.size() > num2.size()) return true;
         if (num1.size() < num2.size()) return false;
         for (int i = 0; i < num1.size(); ++i) {
@@ -143,7 +143,7 @@ public:
     }
 
     // Phương thức nhân hai số lớn dưới dạng chuỗi
-    string multiply(string num1, string num2) {
+    string multiply(string num1, string num2) const {
         if (num1 == "0" || num2 == "0") return "0";
 
         vector<int> result(num1.size() + num2.size(), 0);
@@ -165,7 +165,7 @@ public:
     }
 
     // Phương thức chia một số lớn dưới dạng chuỗi cho 2
-    string divideBy2(string num) {
+    string divideBy2(string num) const {
         string result;
         int carry = 0;
         for (char digit : num) {
@@ -179,7 +179,7 @@ public:
     }
 
     // Phương thức tính num % a dưới dạng chuỗi
-    string mod(string num, string a) {
+    string mod(string num, string a) const {
         string result = "0";
         for (char digit : num) {
             result = multiply(result, "10");
@@ -190,7 +190,7 @@ public:
     }
 
     // Phương thức tính phần dư (num % a) bằng cách chia thủ công
-    string modInternal(string num, string a) {
+    string modInternal(string num, string a) const {
         string remainder = num;
         while (isGreaterOrEqual(remainder, a)) {
             remainder = subtract(remainder, a);
@@ -209,7 +209,6 @@ public:
     }
 };
 
-
 BigInteger modular_exponentiation(BigInteger x, BigInteger y, BigInteger p) {
     BigInteger res("1"); // Khởi tạo kết quả là "1"
     x = x % p;           // Modulo x với p
@@ -227,15 +226,4 @@ BigInteger modular_exponentiation(BigInteger x, BigInteger y, BigInteger p) {
     }
 
     return res;
-}
-
-// Hàm main để kiểm tra
-int main() {
-    BigInteger x("2");
-
-    BigInteger y("5125");
-    BigInteger p("58905897777877889755588822222254895359858835");
-
-    cout << "Power is " << modular_exponentiation(x, y, p) << endl;
-    return 0;
 }
