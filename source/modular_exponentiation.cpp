@@ -48,7 +48,7 @@ public:
         if (divisor == 2) {
             return BigInteger(divideBy2(this->value));
         }
-        throw invalid_argument("Only division by 2 is implemented.");
+        // throw invalid_argument("Only division by 2 is implemented.");
     }
 
     // Định nghĩa toán tử chia lấy dư
@@ -223,6 +223,7 @@ BigInteger modular_exponentiation(BigInteger x, BigInteger y, BigInteger p) {
 // Hàm main để kiểm tra
 int main() {
     BigInteger x("2");
+
     BigInteger y("5125");
     BigInteger p("58905897777877889755588822222254895359858835");
 
