@@ -2,6 +2,7 @@
 #include <string>
 #include <vector>
 #include <algorithm> // For reverse
+#include <stdexcept>
 
 using namespace std;
 
@@ -31,6 +32,14 @@ public:
 
     bool operator!=(const BigInteger& other) const {
         return this->value != other.value;
+    }
+
+    bool operator>=(const BigInteger& other) const {
+        return this->value >= other.value;
+    }
+    
+    bool operator<=(const BigInteger& other) const {
+        return this->value <= other.value;
     }
 
     // Định nghĩa toán tử trừ
