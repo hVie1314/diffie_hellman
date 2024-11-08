@@ -5,7 +5,7 @@
 
 using namespace std;
 
-string generateRandomWithinRange(const string& range) 
+string generateRandomBigIntegerWithinRange(const string& range) 
 {
 	string result = "";
 	random_device rd;
@@ -32,7 +32,7 @@ BigInteger randomBigInteger(const BigInteger& a, const BigInteger& b)
     // Calculate the range of the random number
 	BigInteger range = b - a; 
 
-	string randInRangeStr = generateRandomWithinRange(range.getValue());
+	string randInRangeStr = generateRandomBigIntegerWithinRange(range.getValue());
 	BigInteger randInRange(randInRangeStr);
 
 	return a + randInRange; 
