@@ -1,4 +1,4 @@
-#include "modular_exponentiation.cpp"
+#include "generate_private_key.h"
 #include <random>
 
 // tạo khóa riêng ngẫu nhiên nằm trong khoảng [2, p - 2]
@@ -60,13 +60,4 @@ BigInteger generate_private_key(BigInteger p)
         result = result % (p - temp);
         return result;
     }
-}
-
-// Hàm main để kiểm tra
-int main()
-{
-    BigInteger p("59818353660423688601358037158480211881799914345103");
-    BigInteger a = generate_private_key(p);
-    cout << "private key: " << a << endl;
-    return 0;
 }
