@@ -78,8 +78,13 @@ string BigInteger::add(string num1, string num2) const {
 }
 
 string BigInteger::subtract(string num1, string num2) const {
-    if (!isGreaterOrEqual(num1, num2))
-        return "0"; // Giới hạn nếu num1 < num2 (đơn giản hóa)
+    bool negativeResult = false;
+    
+    // Đảm bảo num1 luôn là số lớn hơn hoặc bằng num2
+    if (!isGreaterOrEqual(num1, num2)) {
+        swap(num1, num2);  // Đổi chỗ nếu num1 < num2
+        negativeResult = true; // Đánh dấu kết quả là âm
+    }
 
     string result = "";
     int n1 = num1.size(), n2 = num2.size();
@@ -92,8 +97,7 @@ string BigInteger::subtract(string num1, string num2) const {
         if (sub < 0) {
             sub += 10;
             carry = 1;
-        }
-        else {
+        } else {
             carry = 0;
         }
         result.push_back(sub + '0');
@@ -104,8 +108,7 @@ string BigInteger::subtract(string num1, string num2) const {
         if (sub < 0) {
             sub += 10;
             carry = 1;
-        }
-        else {
+        } else {
             carry = 0;
         }
         result.push_back(sub + '0');
@@ -113,8 +116,14 @@ string BigInteger::subtract(string num1, string num2) const {
 
     reverse(result.begin(), result.end());
     result.erase(0, min(result.find_first_not_of('0'), result.size() - 1));
+
+    // Thêm dấu âm nếu kết quả là âm
+    if (negativeResult) {
+        result = "-" + result;
+    }
     return result;
 }
+
 
 bool BigInteger::isGreaterOrEqual(string num1, string num2) const {
     if (num1.size() > num2.size()) return true;
