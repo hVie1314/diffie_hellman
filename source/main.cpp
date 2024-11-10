@@ -20,7 +20,6 @@ int main() {
     BigInteger public_key_A = modular_exponentiation(g, private_key_A, p);
     BigInteger public_key_B = modular_exponentiation(g, private_key_B, p);
 
-
     // Tính khóa chung mà mỗi bên sẽ có
     BigInteger shared_secret_A = modular_exponentiation(public_key_B, private_key_A, p);
     BigInteger shared_secret_B = modular_exponentiation(public_key_A, private_key_B, p);
