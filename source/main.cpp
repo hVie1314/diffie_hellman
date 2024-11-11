@@ -1,5 +1,3 @@
-// main.cpp
-
 #include "modular_exponentiation.h" // Đã bao gồm BigInteger và hàm modular_exponentiation
 #include "generate_safe_prime.h"     // Đã bao gồm hàm generateSafePrime và generate_private_key
 #include "generate_private_key.h"
@@ -28,7 +26,7 @@ int main() {
     cout << "Shared secret that Bob can solve " << shared_secret_B << endl;
 
     // Kiểm tra tính hợp lệ của khóa chung
-    std::cout << "Does process correct? " << (shared_secret_A == shared_secret_B) << "\n";
+    std::cout << "Does the process correct? " << (shared_secret_A == shared_secret_B) << "\n";
 
     return 0;
 }
